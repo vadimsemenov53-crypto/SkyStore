@@ -1,0 +1,22 @@
+<hr>
+
+<h3>Предоставленные контакты</h3>
+
+{% for contact in contacts %}
+
+<div class="card mt-3">
+    <div class="card-body">
+
+        <h5>
+            {{ contact.first_name }}
+            {{ contact.last_name }}
+        </h5>
+
+        <p>Телефон: {{ contact.phone }}</p>
+        <p>Город: {{ contact.city }}</p>
+        <p>Адрес: {{ contact.address }}</p>
+
+    </div>
+</div>
+
+{% endfor %}

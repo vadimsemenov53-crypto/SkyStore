@@ -1,0 +1,73 @@
+{% extends "blogs/base_blog.html" %}
+{% load blog_tags %}
+{% block content %}
+
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            {% for post in object_list %}
+
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ post.image|media_filter }}">
+                    <div class="card-body">
+                        <p class="card-text">{{ post.title }}</p>
+                        <p class="card-text">{{ post.content | truncatechars:100 }}</p>
+                        <p class="card-text">Количество просмотров: {{ post.views_count }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-primary" href="{% url 'blogs:blog_detail' post.pk %}" role="button">
+                                    Посмотреть
+                                </a>
+
+                                {% if perms.blogs.change_blogpost %}
+                                <a class="btn btn-secondary" href="{% url 'blogs:blog_update' post.pk %}" role="button">
+                                    Редактировать
+                                </a>
+                                {% endif %}
+
+                                {% if perms.blogs.delete_blogpost %}
+                                <a class="btn btn-danger" href="{% url 'blogs:blog_delete' post.pk %}" role="button">Удалить</a>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                        Назад
+                    </a>
+                </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">
+                        {{ num }}
+                    </a>
+                </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                        Вперёд
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+    </div>
+</div>
+
+{% endblock %}

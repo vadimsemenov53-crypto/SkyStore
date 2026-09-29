@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load catalog_tags %}
+
+{% block content %}
+{% include 'header.html' %}
+
+{% if object %}
+<div class="pricing-header px-2 py-3 pt-md-0 pb-md-4 mx-auto text-center">
+    <p>Отредактируйте карточку вашего товара</p>
+</div>
+{% else %}
+<div class="pricing-header px-2 py-3 pt-md-0 pb-md-4 mx-auto text-center">
+    <p>Заполните карточку вашего товара</p>
+</div>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <div class="container">
+        <div class="card mb-3 border-info">
+
+            {{ form.as_p }}
+
+            <div class="mx-5 mb-3">
+                <button type="submit"
+                        class="btn btn-outline-primary">
+                    Сохранить товар
+                </button>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+{% endblock %}

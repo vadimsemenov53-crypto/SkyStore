@@ -1,0 +1,26 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Смартфоны",
+        "description": "Умные гаджеты для разных целей"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Телевизоры",
+        "description": "Различные диагонали и матрицы"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Наушники",
+        "description": "Все самое лучшее для твоих ушей"
+    }
+}
+]
